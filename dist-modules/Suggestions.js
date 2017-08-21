@@ -1,18 +1,18 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require("prop-types");
+var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _isEqual = require("lodash/isEqual");
+var _isEqual = require('lodash/isEqual');
 
 var _isEqual2 = _interopRequireDefault(_isEqual);
 
@@ -55,7 +55,7 @@ var Suggestions = function (_Component) {
           props = _this2.props;
 
       var shouldRenderSuggestions = props.shouldRenderSuggestions || _this.shouldRenderSuggestions;
-      return !(0, _isEqual2.default)(props.suggestions, nextProps.suggestions) || shouldRenderSuggestions(nextProps.query) || shouldRenderSuggestions(nextProps.query) != shouldRenderSuggestions(props.query);
+      return !(0, _isEqual2.default)(props.suggestions, nextProps.suggestions) || shouldRenderSuggestions(nextProps.query) || shouldRenderSuggestions(nextProps.query) !== shouldRenderSuggestions(props.query);
     }, _this.componentDidUpdate = function (prevProps) {
       var suggestionsContainer = _this.refs.suggestionsContainer;
       var _this$props = _this.props,
@@ -71,9 +71,9 @@ var Suggestions = function (_Component) {
         }
       }
     }, _this.markIt = function (input, query) {
-      var escapedRegex = query.trim().replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&");
+      var escapedRegex = query.trim().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
       return {
-        __html: input.replace(RegExp(escapedRegex, "gi"), "<mark>$&</mark>")
+        __html: input.replace(RegExp(escapedRegex, 'gi'), '<mark>$&</mark>')
       };
     }, _this.shouldRenderSuggestions = function (query) {
       var _this3 = _this,
@@ -87,13 +87,19 @@ var Suggestions = function (_Component) {
 
       var suggestions = props.suggestions.map(function (item, i) {
         return _react2.default.createElement(
-          "li",
+          'li',
           {
             key: i,
             onMouseDown: props.handleClick.bind(null, i),
             onMouseOver: props.handleHover.bind(null, i),
-            className: i == props.selectedIndex ? props.classNames.activeSuggestion : "" },
-          _react2.default.createElement("span", { dangerouslySetInnerHTML: this.markIt(item, props.query) })
+            className: i === props.selectedIndex ? props.classNames.activeSuggestion : ''
+          },
+          _react2.default.createElement('span', { dangerouslySetInnerHTML: this.markIt(item.text, props.query) }),
+          _react2.default.createElement(
+            'span',
+            { className: 'ReactTags_value' },
+            item.value
+          )
         );
       }.bind(_this));
 
@@ -104,16 +110,14 @@ var Suggestions = function (_Component) {
       }
 
       return _react2.default.createElement(
-        "div",
-        {
-          ref: "suggestionsContainer",
-          className: _this.props.classNames.suggestions },
+        'div',
+        { ref: 'suggestionsContainer', className: _this.props.classNames.suggestions },
         _react2.default.createElement(
-          "ul",
+          'ul',
           null,
-          " ",
+          ' ',
           suggestions,
-          " "
+          ' '
         )
       );
     }, _temp), _possibleConstructorReturn(_this, _ret);
